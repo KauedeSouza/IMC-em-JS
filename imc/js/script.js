@@ -44,6 +44,17 @@ const data = [
     document.getElementById('digito').innerHTML = captar;
     document.getElementById('digito01').innerHTML = captar01;
   }
+
+  function valida(){
+    var name = document.getElementById('name').value;
+    var age = document.getElementById('age').value;
+    var height = document.getElementById('height').value;
+    var weight = document.getElementById('weight').value;
+
+    if(name == "" && age == "" && height == "" && weight == ""){
+      alert("Preencha esses campos!");
+    }
+  }
   // Seleção de elementos
   const imcTable = document.querySelector("#imc-table");
 
@@ -85,10 +96,15 @@ const data = [
     });
   }
   
+
   function validDigits(text) {
     return text.replace(/[^0-9,]/g, "");
   }
   
+  function validardigits(text) {
+    return text.replace(/[^a-z]/g, "");
+  }
+
   function calcImc(height, weight) {
     const imc = (weight / (height * height)).toFixed(1);
     return imc;
@@ -112,9 +128,17 @@ const data = [
   createTable(data);
   
   // Eventos
-  [heightInput, weightInput].forEach((el) => {
+  [ageInput, heightInput, weightInput].forEach((el) => {
     el.addEventListener("input", (e) => {
       const updatedValue = validDigits(e.target.value);
+  
+      e.target.value = updatedValue;
+    });
+  });
+
+  [nameInput].forEach((el) => {
+    el.addEventListener("input", (e) => {
+      const updatedValue = validardigits(e.target.value);
   
       e.target.value = updatedValue;
     });
@@ -122,6 +146,7 @@ const data = [
   
   calcBtn.addEventListener("click", (e) => {
     e.preventDefault();
+    valida();
   
     const weight = +weightInput.value.replace(",", ".");
     const height = +heightInput.value.replace(",", ".");
