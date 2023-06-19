@@ -102,7 +102,7 @@ const data = [
   }
   
   function validardigits(text) {
-    return text.replace(/[^a-z]/g, "");
+    return text.replace(/[^a-z] [^A-Z]/g, "");
   }
 
   function calcImc(height, weight) {
